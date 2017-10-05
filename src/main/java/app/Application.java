@@ -32,6 +32,20 @@ public class Application {
 		port(8080); // pode ser configurável
 
 		/*
+		 * Teste de funcionamento do servidor
+		 */
+
+		get("/helloworld", (request, response) -> {
+			response.type("application/json");
+			return Json.object().add("helloworld", "You called GET! Hello, World!");
+		});
+		
+		post("/helloworld", (request, response) -> {
+			response.type("application/json");
+			return Json.object().add("helloworld", "You called POST! Hello, World!");
+		});
+		
+		/*
 		 * Consultar unidades de grandeza
 		 */
 
@@ -174,8 +188,11 @@ public class Application {
 			response.type("application/json");
 			return responseJson.toString();
 		});
-
-		// Registrar stream para um sensor
+		
+		/*
+		 * Registrar stream para um sensor
+		 */
+		
 		post("/streams/:sensor", (request, response) -> {
 			JsonObject parsedJson = Json.parse(request.body()).asObject();
 			String sensorKey = request.params("sensor");
